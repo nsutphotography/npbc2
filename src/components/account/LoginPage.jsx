@@ -2,7 +2,7 @@ import { TextField, Box, Button, Typography, styled } from "@mui/material";
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // For navigation
-import { UserDataContext } from "../../context/userDataContext";
+import { UserDataContext } from "../../context/UserDataContext";
 
 const Component = styled(Box)`
   margin: auto;
