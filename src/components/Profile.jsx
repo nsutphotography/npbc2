@@ -1,7 +1,7 @@
 // src/components/Profile.jsx
 import React from 'react';
 import { useContext } from 'react';
-import { UserDataContext } from '../context/userDataContext';
+import { UserDataContext } from '../context/UserDataContext';
 const Profile = () => {
   const { user } = useContext(UserDataContext);
 
