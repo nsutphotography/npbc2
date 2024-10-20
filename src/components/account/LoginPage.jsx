@@ -54,15 +54,15 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, loginInfo, { withCredentials: true });
   
-      const data = response.data;
+      const { token, name, email } = response.data;
   
       // If the response is successful
       if (response.status === 200) {
         // Store JWT token in localStorage
-        localStorage.setItem('token', response.data.token);
-        setUser({name:response.data.name,email:response.data.email})
-        // alert(data.message); // Login successful
-        // Redirect to dashboard or another page
+        localStorage.setItem('token', token);
+        setUser({ name, email });
+        
+        // Redirect to profile page
         navigate('/profile');
       }
     } catch (error) {
@@ -72,6 +72,9 @@ const LoginPage = () => {
   
         // Check if the error is due to unverified email
         if (data.redirect) {
+          // Store token_email for OTP verification
+          localStorage.setItem('token_email', data.token_email);
+  
           alert(data.error); // Notify the user that an OTP has been sent
           // Redirect to the /signup/otp page
           window.location.href = data.redirect;
@@ -80,7 +83,7 @@ const LoginPage = () => {
         }
       } else {
         console.error('Error during login:', error);
-        alert('Something went wrong during login. from fruntend catch');
+        alert('Something went wrong during login. from frontend catch');
       }
     }
   };

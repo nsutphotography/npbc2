@@ -3,6 +3,8 @@ import { TextField, Box, Button, Typography, styled } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // assuming you're using react-router-dom v6
 
+const debugging = true;
+
 const Component = styled(Box)`
   margin: auto;
   width: 100%;
@@ -55,7 +57,11 @@ const OtpPage = () => {
 
   const handleOtpSubmit = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup/verify-otp`, { otp }, { withCredentials: true });
+      const token_email = localStorage.getItem('token_email'); // Retrieve the token_email from localStorage
+      if(debugging){
+        console.log("token_email got from local storage",token_email);
+      }
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup/verify-otp`, { otp ,token_email }, { withCredentials: true });
       console.log("OTP verified:", response.data);
 
       if (response.status === 200) {

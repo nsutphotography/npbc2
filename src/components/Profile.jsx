@@ -15,13 +15,31 @@ const Profile = () => {
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
       <h1>Profile Page</h1>
-      {/* <img
-        src={user.profilePicture}
-        alt="Profile"
-        style={{ width: '150px', height: '150px', borderRadius: '50%' }}
-      /> */}
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
+
+
+      {user && user.profilePicture ? (
+        <img
+          src={user.profilePicture}
+          alt="Profile"
+          style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+        />
+      ) : (
+        <p>No profile picture available</p>
+      )}
+
+
+      {user && user.name ? (
+        <h2>{user.name}</h2>
+      ) : (
+        <h2>No name available</h2>
+      )}
+
+
+      {user && user.email ? (
+        <p>{user.email}</p>
+      ) : (
+        <p>No email available</p>
+      )}
     </div>
   );
 };
