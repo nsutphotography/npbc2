@@ -1,0 +1,30 @@
+/* Dark Mode Styles */
+body {
+  background-color: #121212 !important; /* Dark background */
+  color: white !important; /* Default text color */
+  margin: 0 !important; /* Remove default margin */
+}
+
+.blog-list-container {
+  padding: 24px !important; /* Container padding */
+}
+
+.blog-card {
+  background-color: #1d1d1d !important; /* Card background */
+  color: white !important; /* Card text color */
+  margin-bottom: 16px !important; /* Space between cards */
+  min-height: 200px !important; /* Consistent height */
+  flex: 1 1 calc(33.33% - 16px) !important; /* 3 per row, responsive */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  border: 1px solid #333 !important; /* Subtle border */
+  border-radius: 8px !important; /* Rounded corners */
+}
+
+/* Responsive adjustment */
+@media (max-width: 600px) {
+  .blog-card {
+    flex: 1 1 100% !important; /* Full width on small screens */
+  }
+}
