@@ -57,30 +57,23 @@ const SignupPage = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup`, signupInfo, { withCredentials: true });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup`, signupInfo,{ withCredentials: true });
   
       // Check if OTP was sent successfully
       if (response.status === 200) {
         if(debugging){
           console.log("res.data",response.data);
         }
-        const { token_email } = response.data; // Destructure token_email from response
-  
-        // Check if token_email exists
-        if (token_email) {
-          localStorage.setItem('token_email', token_email); // Store token_email in localStorage
-          navigate("/signup/otp"); // Redirect to the OTP page
-        } else {
-          setErrorMessage("Token email not found. Please try again."); // Handle case where token_email is missing
-        }
+
+        navigate("/signup/otp-varify"); // Redirect to the OTP page
       } else {
         setErrorMessage("Failed to send OTP. Please try again.");
       }
     } catch (error) {
       // Improved error handling
       const errorMessage = error.response 
-        ? error.response.data.message || "An error occurred during the signup process."
-        : "An error occurred. Please try again."; // Fallback error message
+        ? error.response.data.message
+        : "An error occurred. Please try again. from frontend catch"; // Fallback error message
   
       setErrorMessage(errorMessage); // Set the error message
     }

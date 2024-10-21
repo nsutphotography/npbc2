@@ -50,44 +50,27 @@ const LoginPage = () => {
     setLoginInfo({ ...loginInfo, [name]: value });
   };
 
-  const handleSubmit = async () => {
-    try {
+const handleSubmit = async () => {
+  try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, loginInfo, { withCredentials: true });
-  
-      const { token, name, email } = response.data;
-  
-      // If the response is successful
+
       if (response.status === 200) {
-        // Store JWT token in localStorage
-        localStorage.setItem('token', token);
-        setUser({ name, email });
-        
-        // Redirect to profile page
-        navigate('/profile');
+          const { name, email } = response.data;
+          setUser({ name, email });
+          navigate('/profile');
       }
-    } catch (error) {
-      // Handle errors
-      if (error.response) {
-        const data = error.response.data;
-  
-        // Check if the error is due to unverified email
-        if (data.redirect) {
-          // Store token_email for OTP verification
-          localStorage.setItem('token_email', data.token_email);
-  
-          alert(data.error); // Notify the user that an OTP has been sent
-          // Redirect to the /signup/otp page
-          window.location.href = data.redirect;
-        } else {
-          alert(data.error); // Handle other login errors
-        }
-      } else {
-        console.error('Error during login:', error);
-        alert('Something went wrong during login. from frontend catch');
-      }
+
+  } catch (error) {
+    
+      if (error.response.status === 403) {
+        alert(error.response.data.message); // Notify user about OTP
+        navigate('/signup/otp-varify');
+    } else {
+        alert(error.response.data.error || 'Login failed. Please try again.');
     }
-  };
-  
+  }
+};
+
 
   return (
     <Component>

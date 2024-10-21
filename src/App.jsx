@@ -6,23 +6,26 @@ import LoginPage from "./components/account/LoginPage"; // Assuming you have thi
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/home/Navbar";
+import CheckCookieButton from "./components/test/CheckCookieButton";
 const App = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/test" element={<CheckCookieButton />} />
         <Route path="/" element={<Navbar />} />
-        <Route path="/signup/otp" element={<OtpPage />} />
+        <Route path="/signup/otp-varify" element={<OtpPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<Profile />} />
 
-        <Route
+        {/* <Route
           path="/profile"
           element={
             <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
-        />
+        /> */}
       </Routes>
     </Router>
   );

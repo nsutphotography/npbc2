@@ -57,12 +57,14 @@ const OtpPage = () => {
 
   const handleOtpSubmit = async () => {
     try {
-      const token_email = localStorage.getItem('token_email'); // Retrieve the token_email from localStorage
-      if(debugging){
-        console.log("token_email got from local storage",token_email);
+      // const token_email = localStorage.getItem('token_email'); // Retrieve the token_email from localStorage
+      // if(debugging){
+      //   // console.log("token_email got from local storage",token_email);
+      // }
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup/verify-otp`, { otp },{ withCredentials: true });
+      if (debugging) {
+        // console.log("OTP verified:", response.data);
       }
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup/verify-otp`, { otp ,token_email }, { withCredentials: true });
-      console.log("OTP verified:", response.data);
 
       if (response.status === 200) {
         navigate("/login"); // Redirect to login page on successful OTP verification
