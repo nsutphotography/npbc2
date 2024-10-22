@@ -1,9 +1,8 @@
+const debugging = true;
 import { TextField, Box, Button, Typography, styled } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
 import axios from "axios";
-
-const debugging = true;
 
 const Component = styled(Box)`
   margin: auto;
@@ -59,10 +58,15 @@ const SignupPage = () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup`, signupInfo,{ withCredentials: true });
   
+      if (debugging) {
+        console.log('signup Response:', response.data , "-- signup page");
+        console.log('Cookies after signup:', document.cookie, "-- signup page");
+      }
+
       // Check if OTP was sent successfully
       if (response.status === 200) {
         if(debugging){
-          console.log("res.data",response.data);
+          console.log("res.data /signup",response.data);
         }
 
         navigate("/signup/otp-varify"); // Redirect to the OTP page

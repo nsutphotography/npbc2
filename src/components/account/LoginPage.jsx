@@ -1,3 +1,4 @@
+const debugging = true;
 import { TextField, Box, Button, Typography, styled } from "@mui/material";
 import React, { useState, useContext } from "react";
 import axios from "axios";
@@ -53,10 +54,11 @@ const LoginPage = () => {
 const handleSubmit = async () => {
   try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, loginInfo, { withCredentials: true });
-      
-      console.log('Login Response:', response.data);
 
-      console.log('Cookies after login:', document.cookie);
+      if (debugging) {
+        console.log('Login Response:', response.data ,"-- login page");
+        console.log('Cookies after login:', document.cookie ,"-- login page");
+      }
 
       if (response.status === 200) {
           const { name, email } = response.data;
