@@ -53,6 +53,10 @@ const LoginPage = () => {
 const handleSubmit = async () => {
   try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, loginInfo, { withCredentials: true });
+      
+      console.log('Login Response:', response.data);
+
+      console.log('Cookies after login:', document.cookie);
 
       if (response.status === 200) {
           const { name, email } = response.data;
