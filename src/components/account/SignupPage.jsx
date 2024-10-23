@@ -56,6 +56,7 @@ const SignupPage = () => {
 
   const handleSubmit = async () => {
     try {
+      console.log('%cSignup start', 'color: green;');
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/signup`, signupInfo,{ withCredentials: true });
   
       if (debugging) {

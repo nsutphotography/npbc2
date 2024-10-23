@@ -57,6 +57,7 @@ const OtpPage = () => {
 
   const handleOtpSubmit = async () => {
     try {
+      console.log('%cOTP start', 'color: green;');
       // const token_email = localStorage.getItem('token_email'); // Retrieve the token_email from localStorage
       // if(debugging){
       //   // console.log("token_email got from local storage",token_email);
